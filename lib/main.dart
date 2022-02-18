@@ -18,8 +18,7 @@ class ShowMeApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: route.routeTable['mainScreen']!);
       },
-      theme: ThemeData(
-      ),
+      theme: ThemeData(),
     );
   }
 }
