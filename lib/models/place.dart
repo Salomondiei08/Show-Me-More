@@ -1,21 +1,17 @@
-class Article {
+class Place {
   final String id;
   final String name;
   final String description;
-  final double price;
-  final String currency;
+  final String contact;
   final String imageUrl;
-  final String size;
   final String websiteUrl;
 
-  Article({
+  Place({
     required this.id,
     required this.name,
     required this.description,
-    required this.price,
-    required this.currency,
+    required this.contact,
     required this.imageUrl,
-    required this.size,
     required this.websiteUrl,
   });
 }

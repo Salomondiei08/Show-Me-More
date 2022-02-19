@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+import 'package:show_me_more/providers/articles_provider.dart';
 import 'helpers/routes.dart' as route;
+import 'providers/places_provider.dart';
 
 void main() {
-  runApp(const ShowMeApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => Articles(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Places(),
+        ),
+      ],
+      child: const ShowMeApp(),
+    ),
+  );
 }
 
 class ShowMeApp extends StatelessWidget {

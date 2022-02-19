@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../screens/aboutScreen.dart';
-import '../screens/cameraScreen.dart';
-import '../screens/mainScreen.dart';
-import '../screens/profileScreen.dart';
+import '../screens/about_screen.dart';
+import '../screens/camera_screen.dart';
+import '../screens/main_screen.dart';
+import '../screens/info_screen.dart';
 
 
 const String mainScreen = '/';
@@ -16,6 +16,6 @@ Map<String, Widget Function(BuildContext)> routeTable = {
 
 mainScreen: (context) => const MainScreen(),
 cameraScreen: (context) => const CameraScreen(),
-profileScreen: (context) => const ProfileScreen(),
+profileScreen: (context) => const InfoScreen(),
 aboutScreen: (context) => const AboutScreen(),
 };
