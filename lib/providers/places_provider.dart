@@ -49,10 +49,12 @@ class Places with ChangeNotifier {
 
   void addPlace(Place place) {
     placeList.add(place);
+    notifyListeners();
   }
 
   void deletePlace(Place place) {
     placeList.removeWhere((oldPlace) => oldPlace.id == place.id);
+    notifyListeners();
   }
 
   List<Place> findByName(String placeName) {

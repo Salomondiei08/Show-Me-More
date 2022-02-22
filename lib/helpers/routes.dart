@@ -6,7 +6,7 @@ import '../screens/main_screen.dart';
 import '../screens/info_screen.dart';
 
 
-const String mainScreen = '/';
+const String mainScreen = '/main_screen';
 const String cameraScreen = '/camera_screen';
 const String profileScreen = '/profile_screen';
 const String aboutScreen = '/about_screen';

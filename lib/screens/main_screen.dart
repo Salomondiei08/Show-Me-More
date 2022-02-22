@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:show_me_more/providers/articles_provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../models/article.dart';
 import '../providers/places_provider.dart';
@@ -12,6 +13,7 @@ import '../widgets/box_element.dart';
 import '../widgets/category_widget.dart';
 import '../widgets/place_grid.dart';
 import '../widgets/rounded_bottom_bar.dart';
+import '../widgets/search.dart';
 import 'info_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,7 +24,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   Widget _pageSelector(int index) {
     switch (index) {
       case 0:
@@ -59,15 +60,22 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: color.kcPrimaryColor,
       body: SafeArea(
-        child: _pageSelector(_selectedPage),
+        child: Stack(
+          
+          children: [
+            _pageSelector(_selectedPage),
+            FloatingSearchWidget(context: context),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: _isPlaceMode ? color.kcGreenColor : color.kcOrange,
         child: const Icon(
-          CupertinoIcons.camera_viewfinder,
+          Icons.view_in_ar,
           color: color.kcGrayColor,
         ),
       ),
@@ -80,7 +88,100 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget buildFloatingSearchBar(BuildContext context) {
+  Widget buildBody() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 3.h),
+          Text(
+            'Welcome on',
+            style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
+                color: _isPlaceMode ? color.kcGreenColor : color.kcOrange),
+          ),
+          SizedBox(height: 1.3.h),
+          RichText(
+            text: TextSpan(
+              style: TextStyle(
+                  fontSize: 25.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              children: [
+                const TextSpan(
+                  text: 'SHOW ME ',
+                ),
+                TextSpan(
+                  text: 'MORE',
+                  style: TextStyle(
+                      color: _isPlaceMode ? color.kcGreenColor : color.kcOrange,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 2.h),
+          SizedBox(height: 2.h),
+          Expanded(
+            child: SizedBox(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CategoryWidget(
+                    onPressed: setPlaceMode,
+                    icon: Icons.business,
+                    text: 'Places',
+                    active: _isPlaceMode,
+                    buttonColor: color.kcGreenColor,
+                  ),
+                  SizedBox(
+                    width: 1.5.w,
+                  ),
+                  CategoryWidget(
+                    onPressed: setArticleMode,
+                    icon: Icons.shopping_cart,
+                    text: 'Articles',
+                    active: !_isPlaceMode,
+                    buttonColor: color.kcOrange,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 2.h),
+          Text(
+            'LE PLUS POPULAIRES',
+            style: TextStyle(
+                fontSize: 20.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 3.h),
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              height: 50.h,
+              child: _isPlaceMode ? const PlaceGrid() : const ArticleGrid(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FloatingSearchWidget extends StatelessWidget {
+  const FloatingSearchWidget({
+    Key? key,
+    required this.context,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
 
@@ -129,97 +230,43 @@ class _MainScreenState extends State<MainScreen> {
       },
     );
   }
+}
 
-  Widget buildBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 18),
-          Text(
-            'Welcome on',
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: _isPlaceMode ? color.kcGreenColor : color.kcOrange),
+class SearchWidget extends StatelessWidget {
+  const SearchWidget({
+    Key? key,
+    required this.context,
+    required bool isPlaceMode,
+  })  : _isPlaceMode = isPlaceMode,
+        super(key: key);
+
+  final BuildContext context;
+  final bool _isPlaceMode;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: TextField(
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          suffixIcon: IconButton(
+            color: Colors.white,
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: Search(),
+              );
+            },
           ),
-          const SizedBox(height: 13),
-          RichText(
-            text: TextSpan(
-              style: const TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-              children: [
-                const TextSpan(
-                  text: 'SHOW ME ',
-                ),
-                TextSpan(
-                  text: 'MORE',
-                  style: TextStyle(
-                      color: _isPlaceMode ? color.kcGreenColor : color.kcOrange,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                filled: true,
-                fillColor: color.kcGrayColor,
-                hintText: _isPlaceMode
-                    ? "Serch for a Place..."
-                    : "Search for an artcle...",
-                hintStyle: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 115,
-            child: Row(
-              children: [
-                CategoryWidget(
-                  onPressed: setPlaceMode,
-                  icon: Icons.business,
-                  text: 'Places',
-                  active: _isPlaceMode,
-                  buttonColor: color.kcGreenColor,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                CategoryWidget(
-                  onPressed: setArticleMode,
-                  icon: Icons.shopping_cart,
-                  text: 'Articles',
-                  active: !_isPlaceMode,
-                  buttonColor: color.kcOrange,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'LE PLUS POPULAIRES',
-            style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 345,
-            child: _isPlaceMode ? const PlaceGrid() : const ArticleGrid(),
-          ),
-        ],
+          filled: true,
+          fillColor: color.kcGrayColor,
+          hintText:
+              _isPlaceMode ? "Serch for a Place..." : "Search for an artcle...",
+          hintStyle: const TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

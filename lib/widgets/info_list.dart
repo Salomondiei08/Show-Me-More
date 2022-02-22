@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:show_me_more/helpers/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../themes/app_colors.dart' as color;
+
+import 'package:share_plus/share_plus.dart';
+
+import 'info_list_item.dart';
 
 class InfoList extends StatelessWidget {
   const InfoList({
     Key? key,
   }) : super(key: key);
+
+
+
+
+void _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,99 +37,35 @@ class InfoList extends StatelessWidget {
         side: const BorderSide(color: Colors.white70, width: 1),
       ),
       child: Column(
-        children: const [
-          ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              side: BorderSide(color: Colors.white70, width: 1),
-            ),
-            leading: Icon(
-              Icons.transfer_within_a_station_outlined,
-              color: Colors.white,
-              size: 25,
-            ),
-            title: Text(
-              'See source code',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+        children:  [
+          InfoListItem(
+            text: 'See Source Code',
+            icon: Icons.ac_unit,
+            isFirst: true,
+            onPressed: () => _launchURL(githubUrl),
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.white70, width: 1),
-            ),
-            leading: Icon(
-              Icons.transfer_within_a_station_outlined,
-              color: Colors.white,
-              size: 25,
-            ),
-            title: Text(
-              'Twitter',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          InfoListItem(
+            text: 'Twitter',
+            icon: Icons.ac_unit,
+            onPressed: () => _launchURL(twitterUrl),
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.white70, width: 1),
-            ),
-            leading: Icon(
-              Icons.help_outline,
-              color: Colors.white,
-              size: 25,
-            ),
-            title: Text(
-              'Need Help ?',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          InfoListItem(
+            text: 'Need Help ?',
+            icon: Icons.help_outline,
+            onPressed: () => _launchURL(helpUrl),
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.white70, width: 1),
-            ),
-            leading: Icon(
-              Icons.share,
-              color: Colors.white,
-              size: 25,
-            ),
-            title: Text(
-              'Share the app',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          InfoListItem(
+            text: 'Share the app',
+            icon: Icons.share,
+            onPressed: () => {
+              Share.share(shareText, subject: 'Download ShowMe More !')
+            },
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
-              ),
-              side: BorderSide(color: Colors.white70, width: 1),
-            ),
-            leading: Icon(
-              Icons.play_arrow,
-              color: Colors.white,
-              size: 25,
-            ),
-            title: Text(
-              'Rate the app...',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          InfoListItem(
+            text: 'Rate the app...',
+            icon: Icons.play_arrow,
+            isLast: true,
+            onPressed: () => _launchURL(playStoreUrl),
           ),
         ],
       ),

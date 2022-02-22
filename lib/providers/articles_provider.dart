@@ -9,10 +9,12 @@ class Articles with ChangeNotifier {
 
   void addArticle(Article article) {
     articleList.add(article);
+    notifyListeners();
   }
 
   void deleteArticle(Article article) {
     articleList.removeWhere((oldArticle) => oldArticle.id == article.id);
+    notifyListeners();
   }
 
   List<Article> findByName(String articleName) {

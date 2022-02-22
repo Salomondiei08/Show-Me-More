@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../themes/app_colors.dart' as color;
 
+import 'package:responsive_sizer/responsive_sizer.dart';
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({
     Key? key,
@@ -28,27 +29,29 @@ class CategoryWidget extends StatelessWidget {
               color: active ? buttonColor : color.kcGrayColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            height: 80,
-            width: 135,
+            height: 10.h,
+            width: 35.w,
             child: Icon(
               icon,
               color: active ? color.kcGrayColor : Colors.white,
-              size: 45,
+              size: 30.sp,
             ),
           ),
         ),
-        const SizedBox(
-          height: 10,
+         SizedBox(
+          height: 2.h,
         ),
-        Container(
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(color: Colors.white, fontSize: 15),
+        Expanded(
+          child: SizedBox(
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(color: Colors.white, fontSize: 15.sp),
+              ),
             ),
+            height: 10.h,
+            width: 44.w
           ),
-          height: 20,
-          width: 154,
         ),
       ],
     );

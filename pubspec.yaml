@@ -36,6 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   material_floating_search_bar: ^0.3.6
   provider: ^6.0.2
+  responsive_sizer: ^3.0.5+1
+  share_plus: ^3.0.5
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

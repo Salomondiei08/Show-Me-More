@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:provider/provider.dart';
 import 'package:show_me_more/providers/articles_provider.dart';
+import 'package:show_me_more/screens/main_screen.dart';
 import 'helpers/routes.dart' as route;
 import 'providers/places_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
     MultiProvider(
       providers: [
@@ -30,7 +36,9 @@ class ShowMeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Show Me More',
       routes: route.routeTable,
-      initialRoute: route.mainScreen,
+      home: ResponsiveSizer(
+        builder: (context, orientation, screentype) => const MainScreen(),
+      ),
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: route.routeTable['mainScreen']!);
       },
