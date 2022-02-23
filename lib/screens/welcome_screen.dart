@@ -24,22 +24,22 @@ class WelcomeScreen extends StatelessWidget {
                     'SHOW ME',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25.sp,
+                        fontSize: 27.sp,
                         fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    height: 5,
+                   SizedBox(
+                    height: 0.5.h,
                   ),
                   Text(
                     "MORE",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: color.kcOrange,
-                        fontSize: 25.sp,
+                        fontSize: 27.sp,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 70.h,
+                    height: 68.h,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 6.w),
