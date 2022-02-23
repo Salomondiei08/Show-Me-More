@@ -1,15 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:show_me_more/providers/articles_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../models/article.dart';
-import '../providers/places_provider.dart';
 import '../themes/app_colors.dart' as color;
 import '../widgets/article_grid.dart';
-import '../widgets/box_element.dart';
+
 import '../widgets/category_widget.dart';
 import '../widgets/place_grid.dart';
 import '../widgets/rounded_bottom_bar.dart';
@@ -213,7 +208,7 @@ class SearchWidget extends StatelessWidget {
                   ),
                 ),
               const  Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Icon(
                     Icons.search,
                     color: Colors.white,

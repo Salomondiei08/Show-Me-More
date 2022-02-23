@@ -50,12 +50,24 @@ class InfoScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white54),
               ),
               const InfoList(),
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum hIpsum.",
-                  style: TextStyle(color: Colors.white),
-                ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Discover AR in the way you've never seen it !",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const Text(
+                        "App developped with 💗 by DIEI Salomon, EFFANGONO Maxime and TEYA Ama",
+                        style: TextStyle(color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
               )
             ],
           ),

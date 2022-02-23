@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../themes/app_colors.dart' as color;
 
@@ -11,11 +12,9 @@ class Search extends SearchDelegate {
     return super.appBarTheme(context).copyWith(
           backgroundColor: color.kcGrayColor,
           scaffoldBackgroundColor: color.kcGrayColor,
-          appBarTheme: AppBarTheme(color: color.kcGrayColor,
-          
+          appBarTheme: AppBarTheme(
+            color: color.kcGrayColor,
             toolbarTextStyle: const TextTheme(
-              
-              
               headline6: TextStyle(
                   // headline 6 affects the query text
                   color: Colors.white,
@@ -61,7 +60,7 @@ class Search extends SearchDelegate {
     final results = places
         .getAll()
         .where(
-          (element) => element.name.toLowerCase().startsWith(
+          (element) => element.name.toLowerCase().contains(
                 query.toLowerCase(),
               ),
         )
@@ -69,9 +68,20 @@ class Search extends SearchDelegate {
 
     return ListView.builder(
       itemBuilder: (context, index) => Card(
+        elevation: 00,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: color.kcGrayColor,
         child: ListTile(
-          title: Text(results[index].name),
-          subtitle: Text(results[index].description),
+          title: Text(
+            results[index].name,
+            style: const TextStyle(color: Colors.white),
+          ),
+          subtitle: Text(
+            results[index].description,
+            style: const TextStyle(color: Colors.white),
+          ),
           leading: Image.network(results[index].imageUrl),
         ),
       ),
@@ -92,21 +102,35 @@ class Search extends SearchDelegate {
         .toList();
 
     return query.isEmpty
-        ? const Center(
-            child: Text('No Items'),
-          )
-        : ListView.builder(
-            itemBuilder: (context, index) => Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: ListTile(
-                title: Text(results[index].name),
-                subtitle: Text(results[index].description),
-                leading: Image.network(results[index].imageUrl),
-              ),
+        ? Center(
+            child: Text(
+              'No Items found',
+              style: TextStyle(color: Colors.white, fontSize: 20.sp),
             ),
-            itemCount: results.length,
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: ListView.builder(
+              itemBuilder: (context, index) => Card(
+                elevation: 00,
+                color: color.kcGrayColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ListTile(
+                  title: Text(
+                    results[index].name,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text(
+                    results[index].description,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  leading: Image.network(results[index].imageUrl),
+                ),
+              ),
+              itemCount: results.length,
+            ),
           );
   }
 }

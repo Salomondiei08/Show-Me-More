@@ -39,6 +39,7 @@ dependencies:
   responsive_sizer: ^3.0.5+1
   share_plus: ^3.0.5
   url_launcher: ^6.0.20
+  introduction_screen: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
+  fonts:
+    - family:  Guthub
+      fonts:
+        - asset: fonts/Guthub.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

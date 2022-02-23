@@ -3,7 +3,7 @@ import 'package:show_me_more/helpers/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../themes/app_colors.dart' as color;
-
+import '../themes/guthub_icons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'info_list_item.dart';
@@ -40,13 +40,13 @@ void _launchURL(String url) async {
         children:  [
           InfoListItem(
             text: 'See Source Code',
-            icon: Icons.ac_unit,
+            icon: Guthub.github_circled,
             isFirst: true,
             onPressed: () => _launchURL(githubUrl),
           ),
           InfoListItem(
             text: 'Twitter',
-            icon: Icons.ac_unit,
+            icon: Guthub.twitter,
             onPressed: () => _launchURL(twitterUrl),
           ),
           InfoListItem(
