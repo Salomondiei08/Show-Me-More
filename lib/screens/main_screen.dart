@@ -64,10 +64,8 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: color.kcPrimaryColor,
       body: SafeArea(
         child: Stack(
-          
           children: [
             _pageSelector(_selectedPage),
-            FloatingSearchWidget(context: context),
           ],
         ),
       ),
@@ -123,6 +121,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           SizedBox(height: 2.h),
+          SearchWidget(
+            context: context,
+            isPlaceMode: _isPlaceMode,
+          ),
           SizedBox(height: 2.h),
           Expanded(
             child: SizedBox(
@@ -172,66 +174,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class FloatingSearchWidget extends StatelessWidget {
-  const FloatingSearchWidget({
-    Key? key,
-    required this.context,
-  }) : super(key: key);
-
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-
-    return FloatingSearchBar(
-      hint: 'Search a place...',
-      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-      transitionDuration: const Duration(milliseconds: 800),
-      transitionCurve: Curves.easeInOut,
-      physics: const BouncingScrollPhysics(),
-      axisAlignment: isPortrait ? 0.0 : -1.0,
-      openAxisAlignment: 0.0,
-      width: isPortrait ? 600 : 500,
-      debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {
-        // Call your model, bloc, controller here.
-      },
-      // Specify a custom transition to be used for
-      // animating between opened and closed stated.
-      transition: CircularFloatingSearchBarTransition(),
-      actions: [
-        FloatingSearchBarAction(
-          showIfOpened: false,
-          child: CircularButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ),
-        FloatingSearchBarAction.searchToClear(
-          showIfClosed: false,
-        ),
-      ],
-      builder: (context, transition) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Material(
-            color: Colors.white,
-            elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(height: 112, color: Colors.amber),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
     Key? key,
@@ -245,27 +187,41 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
-      child: TextField(
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          suffixIcon: IconButton(
-            color: Colors.white,
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: Search(),
-              );
-            },
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: GestureDetector(
+          onTap: () => showSearch(
+            context: context,
+            delegate: Search(),
           ),
-          filled: true,
-          fillColor: color.kcGrayColor,
-          hintText:
-              _isPlaceMode ? "Serch for a Place..." : "Search for an artcle...",
-          hintStyle: const TextStyle(color: Colors.white),
+          child: Container(
+            height: 7.h,
+            width: 90.w,
+            color: color.kcGrayColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    _isPlaceMode
+                        ? 'Search for a place'
+                        : 'Search for an article',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                  ),
+                ),
+              const  Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
