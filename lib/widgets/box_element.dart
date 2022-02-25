@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../models/place.dart';
+import '../screens/detail_screen.dart';
+
 class BoxElement extends StatelessWidget {
   const BoxElement({
-    required this.article,
+    required this.place,
     Key? key,
   }) : super(key: key);
 
-  final article;
+  final place;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: CachedNetworkImageProvider(
-            article.imageUrl,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => DetailScreen(
+            place: place,
           ),
         ),
-        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: CachedNetworkImageProvider(
+              place.imageUrl,
+            ),
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
     );
   }

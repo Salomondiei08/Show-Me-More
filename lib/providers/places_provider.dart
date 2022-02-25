@@ -11,7 +11,7 @@ class Places with ChangeNotifier {
       description:
           "Le Grand amphithéatre de l'INP Centre est un batiment d'une capacité de 5000 places. Ce batiment est utilisé pour des concerts, des conférences",
       contact: '+2250778169151',
-      imageUrl: 'https://media-files.abidjan.net/photo/INPHB%20(59).JPG',
+      imageUrl: 'https://www.jeuneafrique.com/medias/2015/12/08/INP-HB-CI-592x296.jpg',
       websiteUrl: 'https://inphb.ci/2/vues/accueil/',
     ),
     Place(
@@ -20,7 +20,7 @@ class Places with ChangeNotifier {
       description:
           'Partie Sud de l\'INP réverbée aux étudiants des classes préparatoires',
       contact: '+2250778169151',
-      imageUrl: 'https://media-files.abidjan.net/photo/INPHB%20(59).JPG',
+      imageUrl: 'https://afriquinfos.com/wp-content/uploads/2019/09/INP-Houphou%C3%ABt-Boigny-DR.jpg',
       websiteUrl: 'https://inphb.ci/2/vues/accueil/',
     ),
     Place(
@@ -40,7 +40,7 @@ class Places with ChangeNotifier {
           'Partie Nord de l\'INP réverbée aux étudiants des écoles d\'ingénieurs',
       contact: '+2250778169151',
       imageUrl:
-          'http://www.atoo.ci/wp-content/uploads/2019/07/inp-hb-education-enseignement-sup%C3%A9rieur-e1564589242628.jpg',
+          'https://media-files.abidjan.net/photo/INPHB%20(59).JPG',
       websiteUrl: 'https://inphb.ci/2/vues/accueil/',
     ),
     Place(

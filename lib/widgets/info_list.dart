@@ -25,8 +25,6 @@ void _launchURL(String url) async {
 }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Card(

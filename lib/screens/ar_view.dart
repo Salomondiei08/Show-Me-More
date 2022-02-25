@@ -25,6 +25,7 @@ final random = Random();
 
 int number = random.nextInt(2);
 
+
 class _ArViewState extends State<ArView> {
   bool isPlaceNotFound = true;
 
@@ -36,6 +37,7 @@ class _ArViewState extends State<ArView> {
 
   @override
   Widget build(BuildContext context) {
+    print(number);
     final place = Provider.of<Places>(context).placeList;
     return Scaffold(
       body: Stack(
@@ -104,13 +106,13 @@ class _ArViewState extends State<ArView> {
           content: Text("Image Scanned"),
         ),
       );
-    }
 
-    setState(() {
+      addImage(arImage);
+
+         setState(() {
       isPlaceNotFound = true;
     });
-
-    addImage(arImage);
+    }
   }
 
   void laodImage() async {
@@ -121,7 +123,7 @@ class _ArViewState extends State<ArView> {
 
   Future addImage(ArCoreAugmentedImage arImage) async {
     final bytes =
-        (await rootBundle.load("assets/inp$random.png")).buffer.asUint8List();
+        (await rootBundle.load("assets/inp-ar2.png")).buffer.asUint8List();
 
     final placeImages = ArCoreNode(
       image: ArCoreImage(bytes: bytes, width: 600, height: 600),

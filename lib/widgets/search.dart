@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../screens/detail_screen.dart';
 import '../themes/app_colors.dart' as color;
 
 import '../providers/places_provider.dart';
@@ -119,13 +120,20 @@ class Search extends SearchDelegate {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        place: results[index],
+                      ),
+                    ),
+                  ),
                   title: Text(
                     results[index].name,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   subtitle: Text(
                     results[index].description,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   leading: Image.network(results[index].imageUrl),
                 ),

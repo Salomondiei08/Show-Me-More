@@ -24,7 +24,7 @@ class PlaceGrid extends StatelessWidget {
                 ),
                 itemCount: place.getLenght(),
                 itemBuilder: (_, index) => BoxElement(
-                  article: place.getAll()[index],
+                  place: place.getAll()[index],
                 ),
               )
             : const Center(
