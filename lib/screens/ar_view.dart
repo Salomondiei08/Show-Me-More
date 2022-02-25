@@ -32,18 +32,6 @@ class _ArViewState extends State<ArView> {
 
   Map<int, ArCoreAugmentedImage> imagesMap = {};
 
-  Barcode? result;
-  QRViewController? controller;
-
-  @override
-  void reassemble() {
-    super.reassemble();
-    if (Platform.isAndroid) {
-      controller!.pauseCamera();
-    }
-    controller!.resumeCamera();
-  }
-
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   @override
@@ -110,6 +98,12 @@ class _ArViewState extends State<ArView> {
   void controlTrackingImages(ArCoreAugmentedImage arImage) {
     if (!imagesMap.containsKey(arImage.index)) {
       imagesMap[arImage.index] = arImage;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Image Scanned"),
+        ),
+      );
     }
 
     setState(() {
@@ -127,7 +121,7 @@ class _ArViewState extends State<ArView> {
 
   Future addImage(ArCoreAugmentedImage arImage) async {
     final bytes =
-        (await rootBundle.load("assets/amphi.png")).buffer.asUint8List();
+        (await rootBundle.load("assets/inp$random.png")).buffer.asUint8List();
 
     final placeImages = ArCoreNode(
       image: ArCoreImage(bytes: bytes, width: 600, height: 600),
@@ -166,23 +160,6 @@ class _ArViewState extends State<ArView> {
     arCoreController.dispose();
   }
 
-  void _onQRViewCreated(QRViewController controller) {
-    setState(() {
-      this.controller = controller;
-    });
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        print(result!.code);
-      });
-
-      if (result!.code!.startsWith("type")) {
-        print("Succes");
-        //  showBottomSheet(context: context, builder: (context) => _buildBottomSheet(context));
-      }
-    });
-  }
-
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
@@ -190,25 +167,5 @@ class _ArViewState extends State<ArView> {
         const SnackBar(content: Text('no Permission')),
       );
     }
-  }
-
-  Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = 40.h;
-    // To ensure the Scanner view is properly sizes after rotation
-    // we need to listen for Flutter SizeChanged notification and update controller
-    return QRView(
-      key: qrKey,
-      onQRViewCreated: _onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-          overlayColor: Colors.black38,
-          borderColor: color.kcOrange,
-          borderRadius: 10,
-          borderLength: 60,
-          borderWidth: 10,
-          cutOutBottomOffset: 0,
-          cutOutSize: scanArea),
-      onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
-    );
   }
 }
