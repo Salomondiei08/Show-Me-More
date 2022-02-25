@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../models/article.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BoxElement extends StatelessWidget {
   const BoxElement({
@@ -16,7 +15,9 @@ class BoxElement extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage(article.imageUrl),
+          image: CachedNetworkImageProvider(
+            article.imageUrl,
+          ),
         ),
         borderRadius: BorderRadius.circular(20),
       ),

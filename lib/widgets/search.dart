@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -82,7 +83,7 @@ class Search extends SearchDelegate {
             results[index].description,
             style: const TextStyle(color: Colors.white),
           ),
-          leading: Image.network(results[index].imageUrl),
+          leading: CachedNetworkImage(imageUrl: results[index].imageUrl),
         ),
       ),
       itemCount: results.length,

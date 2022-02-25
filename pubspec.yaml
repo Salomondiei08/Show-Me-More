@@ -39,14 +39,15 @@ dependencies:
   responsive_sizer: ^3.0.5+1
   share_plus: ^3.0.5
   url_launcher: ^6.0.20
-  introduction_screen: ^3.0.0
   qr_code_scanner: ^0.7.0
-  ar_flutter_plugin: ^0.6.2
-  arcore_flutter_plugin: ^0.0.11
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  arcore_flutter_plugin:
+    path: arcore_plugin
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,9 +68,22 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
+    - assets/qrcode.png
+    - assets/quote.jpg
+    - assets/AndroidRobot.gif
+    - assets/ArcticFox.gif
+    - assets/TocoToucan.gif
+    - assets/fox_face_mesh_texture.png
+    - assets/prova_texture.png
+    - assets/earth.jpg
+    - assets/earth_augmented_image.jpg
+    - assets/myimages.imgdb
+    - assets/stevejobs.jpg
+    - assets/ironman.png
+    - assets/powerarm.png
+    - assets/glasses.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

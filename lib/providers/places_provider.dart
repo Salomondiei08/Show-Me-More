@@ -4,9 +4,19 @@ import '../models/place.dart';
 
 class Places with ChangeNotifier {
   List<Place> placeList = [
+    
+     Place(
+      id: DateTime.now().toString(),
+      name: 'Amphithéatre INP Centre',
+      description:
+          "Le Grand amphithéatre de l'INP Centre est un batiment d'une capacité de 5000 places. Ce batiment est utilisé pour des concerts, des conférences",
+      contact: '+2250778169151',
+      imageUrl: 'https://media-files.abidjan.net/photo/INPHB%20(59).JPG',
+      websiteUrl: 'https://inphb.ci/2/vues/accueil/',
+    ),
     Place(
       id: DateTime.now().toString(),
-      name: 'INP-SUD',
+      name: 'Administration INP Centre',
       description:
           'Partie Sud de l\'INP réverbée aux étudiants des classes préparatoires',
       contact: '+2250778169151',
@@ -15,7 +25,7 @@ class Places with ChangeNotifier {
     ),
     Place(
       id: DateTime.now().toString(),
-      name: 'INP-NORD',
+      name: 'INP centre',
       description:
           'Partie Nord de l\'INP réverbée aux étudiants des écoles d\'ingénieurs',
       contact: '+2250778169151',

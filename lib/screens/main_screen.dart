@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -66,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, route.cameraScreen),
+        onPressed: () => Navigator.pushNamed(context, route.arView),
         backgroundColor: _isPlaceMode ? color.kcGreenColor : color.kcOrange,
         child: const Icon(
           Icons.view_in_ar,
