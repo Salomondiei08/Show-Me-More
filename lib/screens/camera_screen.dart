@@ -42,7 +42,7 @@ class _CameraScreenState extends State<CameraScreen> {
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
-        overlayColor: Colors.black38,
+          overlayColor: Colors.black38,
           borderColor: color.kcOrange,
           borderRadius: 10,
           borderLength: 60,
@@ -64,7 +64,8 @@ class _CameraScreenState extends State<CameraScreen> {
       });
 
       if (result!.code!.startsWith("type")) {
-        showBottomSheet(context: context, builder: (context) => _buildBottomSheet(context));
+        print("Succes");
+        //  showBottomSheet(context: context, builder: (context) => _buildBottomSheet(context));
       }
     });
   }
