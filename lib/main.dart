@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:provider/provider.dart';
 import 'package:show_me_more/providers/articles_provider.dart';
-import 'package:show_me_more/screens/main_screen.dart';
-import 'package:show_me_more/screens/onboarding_screen.dart';
 import 'package:show_me_more/screens/welcome_screen.dart';
 import 'helpers/routes.dart' as route;
 import 'providers/places_provider.dart';

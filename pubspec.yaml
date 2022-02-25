@@ -40,6 +40,9 @@ dependencies:
   share_plus: ^3.0.5
   url_launcher: ^6.0.20
   introduction_screen: ^3.0.0
+  qr_code_scanner: ^0.7.0
+  ar_flutter_plugin: ^0.6.2
+  arcore_flutter_plugin: ^0.0.11
 
 dev_dependencies:
   flutter_test:

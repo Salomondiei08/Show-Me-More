@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../helpers/routes.dart' as route;
 import '../themes/app_colors.dart' as color;
 import '../widgets/article_grid.dart';
 
@@ -65,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, route.cameraScreen),
         backgroundColor: _isPlaceMode ? color.kcGreenColor : color.kcOrange,
         child: const Icon(
           Icons.view_in_ar,

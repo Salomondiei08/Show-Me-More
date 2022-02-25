@@ -27,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
                         fontSize: 27.sp,
                         fontWeight: FontWeight.bold),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 0.5.h,
                   ),
                   Text(
