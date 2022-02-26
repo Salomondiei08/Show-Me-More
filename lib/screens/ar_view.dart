@@ -25,7 +25,6 @@ final random = Random();
 
 int number = random.nextInt(2);
 
-
 class _ArViewState extends State<ArView> {
   bool isPlaceNotFound = true;
 
@@ -37,7 +36,9 @@ class _ArViewState extends State<ArView> {
 
   @override
   Widget build(BuildContext context) {
+
     print(number);
+
     final place = Provider.of<Places>(context).placeList;
     return Scaffold(
       body: Stack(
@@ -83,7 +84,7 @@ class _ArViewState extends State<ArView> {
                     description: place[number].description,
                     contact: place[number].websiteUrl,
                   ),
-                )
+                ),
         ],
       ),
     );
@@ -98,20 +99,22 @@ class _ArViewState extends State<ArView> {
   }
 
   void controlTrackingImages(ArCoreAugmentedImage arImage) {
+
     if (!imagesMap.containsKey(arImage.index)) {
       imagesMap[arImage.index] = arImage;
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Image Scanned"),
+          content: Text("Image Detected"),
         ),
       );
 
+
       addImage(arImage);
 
-         setState(() {
-      isPlaceNotFound = true;
-    });
+      //      setState(() {
+      //   isPlaceNotFound = true;
+      // });
     }
   }
 
@@ -123,7 +126,7 @@ class _ArViewState extends State<ArView> {
 
   Future addImage(ArCoreAugmentedImage arImage) async {
     final bytes =
-        (await rootBundle.load("assets/inp-ar2.png")).buffer.asUint8List();
+        (await rootBundle.load("assets/inp-ar1.png")).buffer.asUint8List();
 
     final placeImages = ArCoreNode(
       image: ArCoreImage(bytes: bytes, width: 600, height: 600),
@@ -136,7 +139,7 @@ class _ArViewState extends State<ArView> {
   }
 
   Future addShpere(ArCoreAugmentedImage arImage) async {
-    final ByteData textureBytes = await rootBundle.load("assets/earth.jpg");
+    final ByteData textureBytes = await rootBundle.load("assets/inp-ar1.png");
 
     final material = ArCoreMaterial(
       color: Colors.transparent,
